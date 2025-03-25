@@ -6,9 +6,16 @@ from PIL import Image
 
 # Load the trained model
 @st.cache_resource
+import gdown
+
+@st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model("breast_cancer_model.h5")  # Ensure this file is in your GitHub repo
+    url = "https://drive.google.com/uc?id=14Mm9RcmzLlsn8mInk0pu3IUgoaONrnVu"  # Replace YOUR_FILE_ID
+    output = "breast_cancer_model.keras"
+    gdown.download(url, output, quiet=False)  # Download model from Google Drive
+    model = tf.keras.models.load_model(output)
     return model
+
 
 model = load_model()
 
